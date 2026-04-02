@@ -1,4 +1,5 @@
 import useGames from "../hooks/useGame"
+import GameCard from "../components/GameCard"
 
 function HomePage(){
     const {games, loading, error} = useGames()
@@ -7,9 +8,7 @@ function HomePage(){
     return(
         <div>
             {games.map(game => (
-                <p key={game.id}>
-                    {game.name}
-                </p>
+                <GameCard key={game.id} game={game}/>
             ))}
         </div>
     )
