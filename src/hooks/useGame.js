@@ -8,21 +8,21 @@ function useGames(search=''){
 
     useEffect(() =>{
         let cancelled = false
-            async function load(){
-                setLoading(true)
-                try{
-                    const data = await getGames(search)
-                    if (!cancelled) setGames(data)
-                } catch(e){
-                    if (!cancelled) setError(e.message)
-                } finally{
-                    if (!cancelled) setLoading(false)
-                }
-            }
-        load()
-        return () => { cancelled = true } // เรียกเมื่อ ก่อน effect รันใหม่
-    },[search])
 
+        async function load(){
+            setLoading(true)
+            try{
+                const data = await getGames(search)
+                if(!cancelled) setGames(data)
+            } catch(e){
+                if(!cancelled) setError(e.message)
+            } finally{
+                if(!cancelled) setLoading(false)
+            }
+        }
+        load()
+        return () => { cancelled = true}
+    },[search])
     return {games, loading, error}
 }
 
